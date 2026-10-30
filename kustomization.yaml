@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: zot
 resources:
   - namespace.yaml
+  - eso.yaml
   - pvc.yaml
   - deployment.yaml
   - service.yaml
