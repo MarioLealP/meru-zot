@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry
+spec:
+  storageClassName: hdd # mirror data can be re-fetched; our own images get an offsite backup later
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 150Gi

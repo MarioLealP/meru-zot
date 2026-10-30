@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zot
+spec:
+  clusterIP: 10.43.0.50 # fixed: k3s's containerd on the host pulls through this (clockmost-infra: ops/k3s/registries.yaml)
+  selector:
+    app: zot
+  ports:
+    - name: registry
+      port: 5000
+      targetPort: registry
+    - name: http # plain http://zot.clockmost.com inside the cluster (cluster DNS, clockmost-infra: ops/k3s/manifests/coredns-custom.yaml)
+      port: 80
+      targetPort: registry

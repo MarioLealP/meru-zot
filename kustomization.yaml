@@ -1,0 +1,13 @@
+# Zot: our image registry + pull-through mirror for docker.io, ghcr.io, quay.io.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: zot
+resources:
+  - namespace.yaml
+  - pvc.yaml
+  - deployment.yaml
+  - service.yaml
+configMapGenerator:
+  - name: zot-config
+    files:
+      - config.json
