@@ -1,0 +1,50 @@
+# Zot's push logins from OpenBao (D66): ESO logs in as the `eso` account (role meru-zot-eso, which reads
+# apps/meru/zot/eso/* only) and writes zot-htpasswd, owning it (D68). Shikigami will rebuild it from every app's
+# push login; for now it holds the copy meru-eso.sh made of the hand-made one. Store at wave -2 so it's validated
+# before the ExternalSecret asks (-1); Zot (0) waits for both.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eso # the identity ESO borrows to log in to OpenBao; no pod runs as it
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+automountServiceAccountToken: false
+---
+apiVersion: external-secrets.io/v1
+kind: SecretStore
+metadata:
+  name: openbao
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  provider:
+    vault:
+      server: https://openbao.clockmost.internal:8204
+      path: apps
+      version: v2
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJ1RENDQVQrZ0F3SUJBZ0lVZGhFWDJENlFNdkFTQnRTRzBVbXZnNi84MmJVd0NnWUlLb1pJemowRUF3TXcKSERFYU1CZ0dBMVVFQXd3UlkyeHZZMnR0YjNOMElISnZiM1FnUTBFd0hoY05Nall4TURBMk1UVTFNakkwV2hjTgpNell4TURBek1UVTFNakkwV2pBY01Sb3dHQVlEVlFRRERCRmpiRzlqYTIxdmMzUWdjbTl2ZENCRFFUQjJNQkFHCkJ5cUdTTTQ5QWdFR0JTdUJCQUFpQTJJQUJOMnNSNEdubE1IN3ArcWczZ2NOUWRzckl5T0N6REpQZnBrRDRIL3EKd2VxWEdsWHNpaWJ6b2lhWDM4NTV4R3hOQkYxbkg5dlZGamhOelB0dmZEamhSZ1ZzTXNtVGw0cG9LSDBQMU5TcgphTFdkOUwwdmw0aHdSWStpNVVEYlBXZW01YU5DTUVBd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBT0JnTlZIUThCCkFmOEVCQU1DQVFZd0hRWURWUjBPQkJZRUZNVXdMRVE1RTdpMTQrUnNBUXU2eVNLNHpGeFVNQW9HQ0NxR1NNNDkKQkFNREEyY0FNR1FDTUNmamZKczd2RThFTyt2Q21UdzJsNFFGWXV2MVRIMVlVakZ3ZWRQcHZqa1R4ZTFqZ1lWVgpFRW15WHFQU29xQjNtZ0l3TWlQMC8xRzZYRlJ4TVQraEhqMTYrdU9qdjZsM25xUHVVV29tc09RYWtQRjVpNTFVCkF3cXZ6WmpmemxyNFdVOW8KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo= # the clockmost root CA (public)
+      auth:
+        kubernetes:
+          mountPath: kubernetes
+          role: meru-zot-eso
+          serviceAccountRef:
+            name: eso
+            audiences: [openbao]
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: zot-htpasswd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  refreshInterval: 5m # a new login reaches the mounted file within minutes, no restart
+  secretStoreRef:
+    name: openbao
+    kind: SecretStore
+  target:
+    name: zot-htpasswd
+    creationPolicy: Owner
+  dataFrom:
+    - extract:
+        key: meru/zot/eso/zot-htpasswd

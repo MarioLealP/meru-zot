@@ -58,7 +58,7 @@ spec:
             name: zot-config
         - name: auth
           secret:
-            secretName: zot-htpasswd # made by hand: one push login per app's builds (Meru/sindri), readers anonymous
+            secretName: zot-htpasswd # ESO fills it (eso.yaml): one push login per app's builds (Meru/sindri), readers anonymous
         - name: registry
           persistentVolumeClaim:
             claimName: registry
