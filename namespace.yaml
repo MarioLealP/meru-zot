@@ -6,3 +6,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "-3" # before the ESO objects inside it
   labels:
     pod-security.kubernetes.io/enforce: restricted
+    app.kubernetes.io/part-of: meru # admits it to OpenBao's shared Meru roles (D71)

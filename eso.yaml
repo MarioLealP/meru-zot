@@ -1,7 +1,7 @@
-# Zot's push logins from OpenBao (D66): ESO logs in as the `eso` account (role meru-zot-eso, which reads
-# apps/meru/zot/eso/* only) and writes zot-htpasswd, owning it (D68). Shikigami will rebuild it from every app's
-# push login; for now it holds the copy meru-eso.sh made of the hand-made one. Store at wave -2 so it's validated
-# before the ExternalSecret asks (-1); Zot (0) waits for both.
+# Zot's push logins from OpenBao (D66): ESO logs in as the `eso` account (shared role meru-eso, D71 - OpenBao fills
+# in the namespace from the login, so it reads apps/meru/zot/eso/* only) and writes zot-htpasswd, owning it (D68).
+# Shikigami will rebuild it from every app's push login; for now it holds the copy meru-eso.sh made of the
+# hand-made one. Store at wave -2 so it's validated before the ExternalSecret asks (-1); Zot (0) waits for both.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -26,7 +26,7 @@ spec:
       auth:
         kubernetes:
           mountPath: kubernetes
-          role: meru-zot-eso
+          role: meru-eso
           serviceAccountRef:
             name: eso
             audiences: [openbao]
