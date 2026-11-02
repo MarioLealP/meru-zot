@@ -201,6 +201,26 @@
               ]
             }
           ]
+        },
+        "meru/heimdall": {
+          "anonymousPolicy": [
+            "read"
+          ],
+          "defaultPolicy": [
+            "read"
+          ],
+          "policies": [
+            {
+              "users": [
+                "heimdall-builder"
+              ],
+              "actions": [
+                "read",
+                "create",
+                "update"
+              ]
+            }
+          ]
         }
       },
       "adminPolicy": {
