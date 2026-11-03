@@ -202,7 +202,7 @@
             }
           ]
         },
-        "meru/homunculus": {
+        "meru/kitsune": {
           "anonymousPolicy": [
             "read"
           ],
@@ -212,7 +212,7 @@
           "policies": [
             {
               "users": [
-                "homunculus-builder"
+                "kitsune-builder"
               ],
               "actions": [
                 "read",
