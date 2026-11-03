@@ -182,26 +182,6 @@
             }
           ]
         },
-        "meru/tanuki": {
-          "anonymousPolicy": [
-            "read"
-          ],
-          "defaultPolicy": [
-            "read"
-          ],
-          "policies": [
-            {
-              "users": [
-                "tanuki-builder"
-              ],
-              "actions": [
-                "read",
-                "create",
-                "update"
-              ]
-            }
-          ]
-        },
         "meru/heimdall": {
           "anonymousPolicy": [
             "read"
