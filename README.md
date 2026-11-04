@@ -5,7 +5,9 @@ deployed by Argo CD from this repo into namespace `zot` (the Application is in
 [Meru/meru](https://git.clockmost.com/Meru/meru) `platform/zot.yaml`).
 
 - **Our images:** `meru/<app>`, pushed only by that app's builds - one push login per app, allowed on its own
-  repository only (`config.json` `accessControl`); everyone may read. Signatures live next to the images.
+  repository only (`config.json` `accessControl`); everyone may read. Signatures live next to the images. `meru/**` is
+  Charon's delete (D112): the most specific match wins, so it reaches only repositories with no entry of their own, the
+  retired apps. Every live app needs its own entry.
 - **Pull-through mirror** for docker.io, ghcr.io and quay.io: copies only what the cluster pulls, so every image the
   cluster runs comes through here and gets scanned.
 - **CVE scans** with Trivy (database refreshed daily).
