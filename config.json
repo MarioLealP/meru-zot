@@ -62,6 +62,24 @@
             "read"
           ]
         },
+        "meru/**": {
+          "anonymousPolicy": [
+            "read"
+          ],
+          "defaultPolicy": [
+            "read"
+          ],
+          "policies": [
+            {
+              "users": [
+                "charon"
+              ],
+              "actions": [
+                "delete"
+              ]
+            }
+          ]
+        },
         "meru/echo": {
           "anonymousPolicy": [
             "read"
