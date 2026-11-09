@@ -439,6 +439,26 @@
               ]
             }
           ]
+        },
+        "meru/whoami": {
+          "anonymousPolicy": [
+            "read"
+          ],
+          "defaultPolicy": [
+            "read"
+          ],
+          "policies": [
+            {
+              "users": [
+                "whoami-builder"
+              ],
+              "actions": [
+                "read",
+                "create",
+                "update"
+              ]
+            }
+          ]
         }
       },
       "adminPolicy": {
