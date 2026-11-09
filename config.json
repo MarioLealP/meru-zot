@@ -499,6 +499,26 @@
               ]
             }
           ]
+        },
+        "meru/searxng": {
+          "anonymousPolicy": [
+            "read"
+          ],
+          "defaultPolicy": [
+            "read"
+          ],
+          "policies": [
+            {
+              "users": [
+                "searxng-builder"
+              ],
+              "actions": [
+                "read",
+                "create",
+                "update"
+              ]
+            }
+          ]
         }
       },
       "adminPolicy": {
