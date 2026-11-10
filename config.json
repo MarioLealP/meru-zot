@@ -619,6 +619,26 @@
               ]
             }
           ]
+        },
+        "meru/drive-rag": {
+          "anonymousPolicy": [
+            "read"
+          ],
+          "defaultPolicy": [
+            "read"
+          ],
+          "policies": [
+            {
+              "users": [
+                "drive-rag-builder"
+              ],
+              "actions": [
+                "read",
+                "create",
+                "update"
+              ]
+            }
+          ]
         }
       },
       "adminPolicy": {
