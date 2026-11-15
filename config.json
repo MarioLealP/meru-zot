@@ -1000,26 +1000,6 @@
             }
           ]
         },
-        "meru/openobserve-gate": {
-          "anonymousPolicy": [
-            "read"
-          ],
-          "defaultPolicy": [
-            "read"
-          ],
-          "policies": [
-            {
-              "users": [
-                "openobserve-gate-builder"
-              ],
-              "actions": [
-                "read",
-                "create",
-                "update"
-              ]
-            }
-          ]
-        },
         "meru/openobserve": {
           "anonymousPolicy": [
             "read"
