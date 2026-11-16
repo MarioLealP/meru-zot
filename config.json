@@ -1119,6 +1119,26 @@
               ]
             }
           ]
+        },
+        "meru/onlyoffice": {
+          "anonymousPolicy": [
+            "read"
+          ],
+          "defaultPolicy": [
+            "read"
+          ],
+          "policies": [
+            {
+              "users": [
+                "onlyoffice-builder"
+              ],
+              "actions": [
+                "read",
+                "create",
+                "update"
+              ]
+            }
+          ]
         }
       },
       "adminPolicy": {
